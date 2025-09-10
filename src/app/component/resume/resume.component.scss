@@ -1,0 +1,252 @@
+.form-section {
+  max-width: 600px;
+  margin-top: 20px;
+  margin-left: 60px;
+  //margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.form-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.25rem;
+
+  label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #444;
+  }
+
+  input,
+  textarea {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 0.75rem;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border 0.2s;
+
+    &:focus {
+      border-color: #3b82f6; // blue-500
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+    }
+  }
+}
+.form-row {
+  display: flex;
+  gap: 1rem; // spacing between fields
+  margin-bottom: 1.25rem;
+}
+
+.form-group-name {
+  display: flex;
+  flex-direction: column;
+  flex: 1; // let both inputs share equal width
+  min-width: 200px;
+
+  label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #444;
+  }
+
+  input {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 0.75rem;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border 0.2s;
+
+    &:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+    }
+  }
+}
+
+.form-group-title {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.25rem;
+  width: 260px;
+  label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #444;
+  }
+
+  input,
+  textarea {
+    padding: 0.55rem;
+    border: 1px solid #ccc;
+    border-radius: 0.75rem;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border 0.2s;
+
+    &:focus {
+      border-color: #3b82f6; // blue-500
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+    }
+  }
+}
+
+.file-upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 2px dashed #bbb;
+  border-radius: 0.75rem;
+  text-align: center;
+  cursor: pointer; // hand pointer on hover
+  transition: border-color 0.2s, background 0.2s;
+
+  &:hover {
+    border-color: #3b82f6; // blue border on hover
+    background: #f9fafb;   // subtle background highlight
+  }
+
+  .placeholder {
+    color: #374151; // gray-700
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .upload-icon {
+      width: 22px;
+      height: 22px;
+      color: #3b82f6; // blue icon
+      transition: color 0.3s;
+    }
+  }
+
+  .file-selected {
+    color: #16a34a; // green
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.upload-btn {
+  width: 100%;
+  background: linear-gradient(to right, #22c55e, #16a34a); // green
+  color: #fff;
+  font-weight: 600;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 0.9rem;
+  cursor: pointer;
+  font-size: 1rem;
+  //transition: transform 0.2s, background 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+    background: linear-gradient(to right, #16a34a, #15803d);
+  }
+}
+
+.resume-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* 3 equal columns */
+  gap: 2rem;
+  margin-top: 2rem;
+  align-items: stretch; /* make all sections same height */
+}
+
+/* Form and Result styling */
+.form-section,
+.result-section{
+  background: #fff;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+/* Result section */
+.result-section {
+  padding: 2rem;
+  width: 350px;
+  margin-top: 20px;
+  margin-left: 10px;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Title */
+.result-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+
+/* Bubble column */
+.bubble-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0.7rem;
+}
+
+/* Bubble style */
+.bubble {
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  font-size: 1rem;
+  white-space: pre-wrap; /* allow text wrap */
+}
+
+/* Label bubble */
+.bubble.label {
+  background: #e0f2fe;
+  color: #0369a1;
+  font-weight: 600;
+}
+
+/* Value bubble */
+.bubble.value {
+  background: #fef9c3;
+  color: #78350f;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+/* Status badge */
+.status-box {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 0.75rem;
+}
+
+.status-approved {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-rejected {
+  background: #fee2e2;
+  color: #991b1b;
+}

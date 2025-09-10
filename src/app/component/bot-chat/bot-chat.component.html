@@ -1,0 +1,19 @@
+<div class="chat-window">
+  <!-- Messages -->
+  <h5 class="form-title">Chat with Bot 🤖</h5>
+  <div #messagesContainer class="messages">
+    <div *ngFor="let msg of messages" class="message" [ngClass]="msg.sender.toLowerCase()">
+      <div class="bubble">
+        <span *ngIf="msg.sender === 'Bot'">🤖 </span>{{ msg.text }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Input -->
+  <div class="input-bar">
+    <input [(ngModel)]="userMessage"
+           (keyup.enter)="sendMessage()"
+           placeholder="Type a message..." />
+    <button (click)="sendMessage()">➤</button>
+  </div>
+</div>

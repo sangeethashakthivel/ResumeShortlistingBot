@@ -1,0 +1,25 @@
+<div class="login-container">
+  <div class="login-card">
+    <!-- Title -->
+    <h2 class="login-title">🔑 Admin Login</h2>
+
+
+    <!-- Username -->
+    <input type="text"
+           placeholder="Username"
+           [(ngModel)]="username"
+           class="login-input">
+
+    <!-- Password -->
+    <input type="password"
+           placeholder="Password"
+           [(ngModel)]="password"
+           class="login-input">
+
+    <!-- Buttons -->
+    <div class="button-row">
+      <button (click)="cancel()" class="btn-cancel">Cancel</button>
+      <button (click)="login()" class="btn-login">Login</button>
+    </div>
+  </div>
+</div>

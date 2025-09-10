@@ -1,0 +1,89 @@
+<div class="resume-container">
+  <!-- 📄 Form Section -->
+  <div class="form-section">
+    <form (ngSubmit)="uploadResume()">
+      <h5 class="form-title">📄 Upload Resume</h5>
+
+      <div class="form-row">
+        <!-- Candidate Name -->
+        <div class="form-group-name">
+          <label for="name">Candidate Name:</label>
+          <input type="text" id="name" placeholder="Candidate Name"
+                 [(ngModel)]="candidateName" name="candidateName">
+        </div>
+
+        <!-- Job Title -->
+        <div class="form-group-name">
+          <label for="title">Job Title:</label>
+          <input type="text" id="title" placeholder="Job Title"
+                 [(ngModel)]="jobTitle" name="jobTitle">
+        </div>
+      </div>
+
+      <!-- Job Description -->
+      <div class="form-group">
+        <label for="job">Job Description:</label>
+        <textarea id="job" placeholder="Job Description"
+                  [(ngModel)]="jobDescription" name="jobDescription"
+                  rows="4"></textarea>
+      </div>
+
+      <!-- File Upload -->
+      <div class="form-group">
+        <label class="file-upload">
+          <input type="file" hidden (change)="onFileSelected($event)">
+          <span *ngIf="!selectedFile" class="placeholder">
+            <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                 viewBox="0 0 24 24">
+              <path d="M12 3l4 4h-3v6h-2V7H8l4-4zm-7 14h14v2H5v-2z"/>
+            </svg>
+            <span>Select resume</span>
+          </span>
+          <span *ngIf="selectedFile" class="file-selected">
+            ✔ {{ selectedFile.name }}
+          </span>
+        </label>
+      </div>
+
+      <!-- Upload Button -->
+      <button type="submit" class="upload-btn">
+        🚀 Upload Resume
+      </button>
+    </form>
+  </div>
+
+  <!-- Results Section -->
+  <div class="result-section">
+    <h4 class="result-title">📊 Resume Evaluation Result</h4>
+    <div class="result-content">
+
+      <div class="bubble-column">
+        <div class="bubble label">Candidate Name</div>
+        <div class="bubble value">{{ uploadResult?.candidateName || 'Not Available' }}</div>
+      </div>
+
+      <div class="bubble-column" >
+        <div class="bubble label">Job Title</div>
+        <div class="bubble value">{{ uploadResult?.jobTitle || 'Not Available' }}</div>
+      </div>
+
+      <div class="bubble-column">
+        <div class="bubble label">Score</div>
+        <div class="bubble value">
+          {{ uploadResult?.score !== null && uploadResult?.score !== undefined ? uploadResult?.score + '%' : 'Not Available' }}
+        </div>
+      </div>
+
+      <div class="status-box"
+           *ngIf="uploadResult?.status"
+           [ngClass]="{
+           'status-approved': uploadResult?.status === 'Selected',
+           'status-rejected': uploadResult?.status === 'Rejected'
+         }">
+        {{ uploadResult?.status }}
+      </div>
+    </div>
+  </div>
+
+</div>
+

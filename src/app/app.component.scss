@@ -1,0 +1,124 @@
+
+.app-bg {
+  padding-top: 90px; // prevent content from being hidden behind header
+}
+
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0rem;
+  position: fixed;  // make header fixed
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1rem 2rem;
+
+
+
+  .header-title {
+    flex: 1;
+    text-align: center;
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin: 0;
+    }
+  }
+
+  .header-actions {
+    .admin-btn {
+      background-color: #2563eb; // blue
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #1d4ed8;
+      }
+    }
+  }
+}
+
+.main-content {
+  display: flex;
+  gap: 1rem;
+}
+
+html, body, app-root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body, app-root,.app-bg {
+  font-family: Arial, sans-serif;
+  background-image: url('/assets/resume_bg_image.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+.logo img {
+  height: 97px;
+  width: 99px;
+  border-radius: 50%;
+}
+
+.row, .col-md-6 {
+  background: transparent !important;
+}
+
+#toast-container {
+  z-index: 999999 !important;
+}
+
+
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  width: 400px;
+  max-width: 90%;
+  height: 45%;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}

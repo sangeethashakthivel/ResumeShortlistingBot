@@ -1,0 +1,58 @@
+.admin-dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding: 1rem;
+  margin-top: 4%;
+}
+
+.section-card {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  table {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  mat-paginator {
+    margin-bottom: 0.5rem;
+  }
+
+  .btn-add {
+    background: #1d4ed8; // Blue color
+    color: #fff;
+    border-radius: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #2563eb;
+    }
+  }
+
+  .btn-delete {
+    background: transparent;
+    border: none;
+    color: #ef4444; // red
+    cursor: pointer;
+    font-size: 1rem;
+
+    &:hover {
+      color: #b91c1c;
+    }
+  }
+}

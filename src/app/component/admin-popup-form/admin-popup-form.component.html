@@ -1,0 +1,17 @@
+<div class="popup-overlay">
+  <div class="popup-content">
+    <h3 class="popup-title">Fill Details</h3>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div *ngFor="let f of fields" class="form-group">
+        <label>{{f.label}}</label>
+        <input [type]="f.type" formControlName="{{f.name}}" class="form-input" />
+      </div>
+
+      <div class="button-row">
+        <button type="button" class="btn-cancel" (click)="cancel()">Cancel</button>
+        <button type="submit" class="btn-save">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

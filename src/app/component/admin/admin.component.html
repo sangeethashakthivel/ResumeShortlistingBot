@@ -1,0 +1,106 @@
+<div class="admin-dashboard">
+  <!-- Section: Skills -->
+  <div class="section-card">
+    <h2>🛠 Skills</h2>
+
+    <table mat-table [dataSource]="skillsDataSource" class="mat-table">
+
+      <ng-container matColumnDef="skillName">
+        <th mat-header-cell *matHeaderCellDef> Skill </th>
+        <td mat-cell *matCellDef="let s"> {{s.skillName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="weightage">
+        <th mat-header-cell *matHeaderCellDef> Weightage </th>
+        <td mat-cell *matCellDef="let s"> {{s.weightage}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let s">
+          <button class="btn-delete" (click)="deleteSkill(s.id)">✕</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="skillsDisplayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: skillsDisplayedColumns;"></tr>
+    </table>
+
+    <mat-paginator #skillsPaginator [length]="skills.length" [pageSize]="5" [pageSizeOptions]="[5,10,20]"></mat-paginator>
+
+    <button class="btn-add" (click)="openPopup('skill')">+ Add Skill</button>
+  </div>
+
+  <!-- Section: Job Roles -->
+  <div class="section-card">
+    <h2>💼 Job Roles</h2>
+
+    <table mat-table [dataSource]="jobRolesDataSource" class="mat-table">
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> Job Role </th>
+        <td mat-cell *matCellDef="let j"> {{j.title}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="thresholdScore">
+        <th mat-header-cell *matHeaderCellDef> Threshold </th>
+        <td mat-cell *matCellDef="let j"> {{j.thresholdScore}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let j">
+          <button class="btn-delete" (click)="deleteJobRole(j.id)">✕</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="jobRolesDisplayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: jobRolesDisplayedColumns;"></tr>
+    </table>
+
+    <mat-paginator   #jobRolesPaginator [length]="jobRoles.length" [pageSize]="5" [pageSizeOptions]="[5,10,20]"></mat-paginator>
+
+    <button class="btn-add" (click)="openPopup('jobRole')">+ Add Role</button>
+  </div>
+
+  <!-- Section: FAQs -->
+  <div class="section-card">
+    <h2>🤖 Bot FAQs</h2>
+
+    <table mat-table [dataSource]="faqDataSource" class="mat-table">
+
+      <ng-container matColumnDef="keyword">
+        <th mat-header-cell *matHeaderCellDef> Keyword </th>
+        <td mat-cell *matCellDef="let f"> {{f.keyword}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="answer">
+        <th mat-header-cell *matHeaderCellDef> Answer </th>
+        <td mat-cell *matCellDef="let f"> {{f.answer}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let f">
+          <button class="btn-delete" (click)="deleteFaq(f.id)">✕</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="faqDisplayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: faqDisplayedColumns;"></tr>
+    </table>
+
+    <mat-paginator  #faqPaginator [length]="faqs.length" [pageSize]="5" [pageSizeOptions]="[5,10,20]"></mat-paginator>
+
+    <button class="btn-add" (click)="openPopup('faq')">+ Add FAQ</button>
+  </div>
+  <app-admin-popup-form
+    *ngIf="showPopup"
+    [title]="popupTitle"
+    [fields]="popupFields"
+    (save)="onPopupSave($event)"
+    (close)="closePopup()">
+  </app-admin-popup-form>
+</div>
+
+

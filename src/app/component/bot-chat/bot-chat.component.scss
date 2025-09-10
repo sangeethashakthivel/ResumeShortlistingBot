@@ -1,0 +1,111 @@
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  height: 71%;
+  width: 470px;
+  margin-top: 50px;
+  margin-left: 190px;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;      // prevent window from growing
+}
+
+/* Messages area */
+.messages {
+  flex: 1;               // fill remaining space inside chat-window
+  padding: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+  background: #efeae2;
+}
+.messages::-webkit-scrollbar {
+  display: none;
+}
+.form-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-text: center;
+  gap: 0.5rem;
+}
+
+
+
+/* Each message wrapper */
+.message {
+  display: flex;
+  margin: 6px 0;
+  max-width: 70%;
+}
+
+.message.you {
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.message.bot {
+  justify-content: flex-start;
+  margin-right: auto;
+}
+
+/* Bubble styles */
+.bubble {
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.you .bubble {
+  background: #d9fdd3; // WhatsApp green bubble
+  color: #111;
+  border-bottom-right-radius: 4px;
+}
+
+.bot .bubble {
+  background: #fff;
+  color: #111;
+  border-bottom-left-radius: 4px;
+}
+
+/* Input area */
+.input-bar {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background: #f0f0f0;
+  border-top: 1px solid #ddd;
+}
+
+.input-bar input {
+  flex: 1;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 14px;
+  font-size: 1rem;
+  outline: none;
+  background: white;
+}
+
+.input-bar button {
+  margin-left: 8px;
+  background: #0084ff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.2s ease;
+}
+
+.input-bar button:hover {
+  background: #006fe6;
+}
