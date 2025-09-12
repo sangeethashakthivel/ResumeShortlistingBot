@@ -14,6 +14,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {AdminPopupFormComponent} from './component/admin-popup-form/admin-popup-form.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {AdminPopupFormComponent} from './component/admin-popup-form/admin-popup-
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    MatIconModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,

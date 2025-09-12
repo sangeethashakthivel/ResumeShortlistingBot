@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { AdminService } from '../services/admin.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {AdminService} from '../services/admin.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-admin',
@@ -26,12 +27,20 @@ export class AdminComponent implements OnInit {
   @ViewChild('skillsPaginator') skillsPaginator!: MatPaginator;
   @ViewChild('jobRolesPaginator') jobRolesPaginator!: MatPaginator;
 
-  constructor(private adminService: AdminService) {}
+  showPopup: boolean = false;
+  popupTitle: string = '';
+  popupFields: any[] = [];
+  popupType: string = ''; // 'skill', 'jobRole', 'faq'
+  editingItem: any = null;
+
+  constructor(private adminService: AdminService,
+              private toastr: ToastrService
+  ) {
+  }
 
   ngOnInit(): void {
     this.loadAll();
   }
-
 
   loadAll() {
     this.adminService.getBotFAQs().subscribe(res => {
@@ -39,11 +48,13 @@ export class AdminComponent implements OnInit {
       this.faqDataSource.data = this.faqs;
       this.faqDataSource.paginator = this.faqPaginator;
     });
+
     this.adminService.getSkills().subscribe(res => {
       this.skills = res;
       this.skillsDataSource.data = this.skills;
       this.skillsDataSource.paginator = this.skillsPaginator;
     });
+
     this.adminService.getJobRoles().subscribe(res => {
       this.jobRoles = res;
       this.jobRolesDataSource.data = this.jobRoles;
@@ -51,60 +62,100 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  // DELETE METHODS
   deleteFaq(id: number) {
-    // similar to your existing logic
+    this.adminService.deleteBotFAQ(id).subscribe(() => {
+      this.toastr.success('Deleted successfully!', 'Success');
+
+      this.loadAll();
+    });
   }
 
-  deleteSkill(id: number) {}
-  deleteJobRole(id: number) {}
+  deleteSkill(id: number) {
+    this.adminService.deleteSkill(id).subscribe(() => {
+      this.toastr.success('Deleted successfully!', 'Success');
+      this.loadAll()
+    });
+  }
 
+  deleteJobRole(id: number) {
+    this.adminService.deleteJobRole(id).subscribe(() => {
+      this.toastr.success('Deleted successfully!', 'Success');
+      this.loadAll()
+    });
+  }
 
-
-  // opupcomponent
-  showPopup: boolean = false;
-  popupTitle: string = '';
-  popupFields: any[] = [];
-  popupType: string = ''; // 'skill', 'jobRole', 'faq'
-
-  openPopup(type: string) {
+  // POPUP METHODS
+  openPopup(type: string, data?: any) {
+    this.showPopup = true;
     this.popupType = type;
+    this.editingItem = data || null;
 
-    if(type === 'skill') {
-      this.popupTitle = 'Add New Skill';
+    if (type === 'skill') {
+      this.popupTitle = data ? 'Edit Skill' : 'Add Skill';
       this.popupFields = [
-        { name: 'skillName', label: 'Skill Name', type: 'text' },
-        { name: 'weightage', label: 'Weightage', type: 'number' }
+        {name: 'skillName', type: 'text', value: data?.skillName || ''},
+        {name: 'weightage', type: 'number', value: data?.weightage || ''}
       ];
-    } else if(type === 'jobRole') {
-      this.popupTitle = 'Add New Job Role';
+    } else if (type === 'jobRole') {
+      this.popupTitle = data ? 'Edit Job Role' : 'Add Job Role';
       this.popupFields = [
-        { name: 'title', label: 'Job Role', type: 'text' },
-        { name: 'thresholdScore', label: 'Threshold Score', type: 'number' }
+        {name: 'title', type: 'text', value: data?.title || ''},
+        {name: 'thresholdScore', type: 'number', value: data?.thresholdScore || ''}
       ];
-    } else if(type === 'faq') {
-      this.popupTitle = 'Add New FAQ';
+    } else if (type === 'faq') {
+      this.popupTitle = data ? 'Edit FAQ' : 'Add FAQ';
       this.popupFields = [
-        { name: 'keyword', label: 'Keyword', type: 'text' },
-        { name: 'answer', label: 'Answer', type: 'text' }
+        {name: 'keyword', type: 'text', value: data?.keyword || ''},
+        {name: 'answer', type: 'textarea', value: data?.answer || ''}
       ];
     }
-
-    this.showPopup = true;
   }
 
   onPopupSave(data: any) {
-    if(this.popupType === 'skill') {
-      this.adminService.createSkill(data).subscribe(() => this.loadAll());
-    } else if(this.popupType === 'jobRole') {
-      this.adminService.createJobRole(data).subscribe(() => this.loadAll());
-    } else if(this.popupType === 'faq') {
-      this.adminService.createBotFAQ(data).subscribe(() => this.loadAll());
+    if (this.popupType === 'skill') {
+      if (this.editingItem) {
+        this.adminService.updateSkill(this.editingItem.id, data).subscribe(() => {
+          this.toastr.success('Updated successfully!', 'Success');
+          this.loadAll()
+        });
+      } else {
+        this.adminService.createSkill(data).subscribe(() => {
+          this.toastr.success('Record Created successfully!', 'Success');
+          this.loadAll()
+        });
+      }
+    } else if (this.popupType === 'jobRole') {
+      if (this.editingItem) {
+        this.adminService.updateJobRole(this.editingItem.id, data).subscribe(() => {
+          this.toastr.success('Updated successfully!', 'Success');
+          this.loadAll()
+        });
+      } else {
+        this.adminService.createJobRole(data).subscribe(() => {
+          this.toastr.success('Record Created successfully!', 'Success');
+          this.loadAll()
+        });
+      }
+    } else if (this.popupType === 'faq') {
+      if (this.editingItem) {
+        this.adminService.updateBotFAQ(this.editingItem.id, data).subscribe(() => {
+          this.toastr.success('Updated successfully!', 'Success');
+          this.loadAll()
+        });
+      } else {
+        this.adminService.createBotFAQ(data).subscribe(() => {
+          this.toastr.success('Record Created successfully!', 'Success');
+          this.loadAll()
+        });
+      }
     }
 
-    this.showPopup = false;
+    this.closePopup();
   }
 
   closePopup() {
     this.showPopup = false;
+    this.editingItem = null;
   }
 }
